@@ -32,9 +32,6 @@ jobs:
           echo "TTS_APIKEYID=${{ secrets.TTS_APIKEYID }}" >> .env
           echo "TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }}" >> .env
 
-      - name: Move .env to correct directory
-        run: mv .env ../.env
-
       - name: Log in to Docker Hub
         run:
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
