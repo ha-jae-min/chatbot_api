@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 public class ChatbotApiApplication {
 
 	public static void main(String[] args) {
+
 		// .env 파일 읽기
 		Dotenv dotenv = Dotenv.configure().load();
 
