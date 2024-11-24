@@ -1,0 +1,52 @@
+
+name: Java CI with Gradle
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Create .env file
+        run: |
+          echo "CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }}" >> .env
+          echo "CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }}" >> .env
+          echo "STT_APIURL=${{ secrets.STT_APIURL }}" >> .env
+          echo "STT_SECRETKEY=${{ secrets.STT_SECRETKEY }}" >> .env
+          echo "TTS_APIURL=${{ secrets.TTS_APIURL }}" >> .env
+          echo "TTS_APIKEYID=${{ secrets.TTS_APIKEYID }}" >> .env
+          echo "TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }}" >> .env
+
+      - name: Log in to Docker Hub
+        run:
+          echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build -x test
+
+      - name: Build the Docker image
+        run: docker build -t hajaemin26/chatbot_api:latest .
+
+      - name: Push the Docker image to Docker Hub
+        run: docker push hajaemin26/chatbot_api:latest

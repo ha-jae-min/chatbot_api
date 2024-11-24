@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: chatbot_api
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: INFO
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE
+
+server:
+  port: 8081
+
+CHATBOT_APIURL: ${CHATBOT_APIURL}
+CHATBOT_SECRETKEY: ${CHATBOT_SECRETKEY}
+STT_APIURL: ${STT_APIURL}
+STT_SECRETKEY: ${STT_SECRETKEY}
+TTS_APIURL: ${TTS_APIURL}
+TTS_APIKEYID: ${TTS_APIKEYID}
+TTS_SECRETKEY: ${TTS_SECRETKEY}
