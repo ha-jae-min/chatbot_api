@@ -57,5 +57,6 @@ jobs:
             -t hajaemin26/chatbot_api:latest \
             .
 
+
       - name: Push the Docker image to Docker Hub
         run: docker push hajaemin26/chatbot_api:latest
