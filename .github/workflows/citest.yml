@@ -22,16 +22,6 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create .env file
-        run: |
-          echo "CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }}" >> .env
-          echo "CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }}" >> .env
-          echo "STT_APIURL=${{ secrets.STT_APIURL }}" >> .env
-          echo "STT_SECRETKEY=${{ secrets.STT_SECRETKEY }}" >> .env
-          echo "TTS_APIURL=${{ secrets.TTS_APIURL }}" >> .env
-          echo "TTS_APIKEYID=${{ secrets.TTS_APIKEYID }}" >> .env
-          echo "TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }}" >> .env
-
       - name: Log in to Docker Hub
         run:
           echo "${{ secrets.DOCKER_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
@@ -46,7 +36,15 @@ jobs:
         run: ./gradlew build -x test
 
       - name: Build the Docker image
-        run: docker build -t hajaemin26/chatbot_api:latest .
+        run: |
+          docker build --build-arg CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }} \
+                       --build-arg CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }} \
+                       --build-arg STT_APIURL=${{ secrets.STT_APIURL }} \
+                       --build-arg STT_SECRETKEY=${{ secrets.STT_SECRETKEY }} \
+                       --build-arg TTS_APIURL=${{ secrets.TTS_APIURL }} \
+                       --build-arg TTS_APIKEYID=${{ secrets.TTS_APIKEYID }} \
+                       --build-arg TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }} \
+                       -t hajaemin26/chatbot_api:latest .
 
       - name: Push the Docker image to Docker Hub
         run: docker push hajaemin26/chatbot_api:latest
