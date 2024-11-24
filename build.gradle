@@ -38,6 +38,10 @@ dependencies {
 	implementation 'org.json:json:20240303'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	// env 파일 읽기
+	implementation 'io.github.cdimascio:dotenv-java:3.0.0'
+
 }
 
 tasks.named('test') {
