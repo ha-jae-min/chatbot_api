@@ -41,7 +41,7 @@ jobs:
             --build-arg TTS_APIURL=${{ secrets.TTS_APIURL }} \
             --build-arg TTS_APIKEYID=${{ secrets.TTS_APIKEYID }} \
             --build-arg TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }} \
-            -t hajaemin26/chatbot_api:latest ../../
+            -t hajaemin26/chatbot_api:latest ../
 
       - name: Push the Docker image to Docker Hub
         run: docker push hajaemin26/chatbot_api:latest
