@@ -33,6 +33,17 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test
 
+      # 시크릿 값 테스트
+      - name: Debug secrets
+        run: |
+          echo "CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }}"
+          echo "CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }}"
+          echo "STT_APIURL=${{ secrets.STT_APIURL }}"
+          echo "STT_SECRETKEY=${{ secrets.STT_SECRETKEY }}"
+          echo "TTS_APIURL=${{ secrets.TTS_APIURL }}"
+          echo "TTS_APIKEYID=${{ secrets.TTS_APIKEYID }}"
+          echo "TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }}"
+
       - name: Build the Docker image
         run: docker build --build-arg CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }} \
           --build-arg CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }} \
