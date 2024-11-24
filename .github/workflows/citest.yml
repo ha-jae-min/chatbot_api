@@ -31,12 +31,9 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build -x test
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Build the Docker image with buildx
+      - name: Build the Docker image
         run: |
-          docker buildx build \
+          docker build \
             --build-arg CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }} \
             --build-arg CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }} \
             --build-arg STT_APIURL=${{ secrets.STT_APIURL }} \
@@ -44,7 +41,7 @@ jobs:
             --build-arg TTS_APIURL=${{ secrets.TTS_APIURL }} \
             --build-arg TTS_APIKEYID=${{ secrets.TTS_APIKEYID }} \
             --build-arg TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }} \
-            -t hajaemin26/chatbot_api:latest .
+            -t hajaemin26/chatbot_api:latest ../
 
       - name: Push the Docker image to Docker Hub
         run: docker push hajaemin26/chatbot_api:latest
