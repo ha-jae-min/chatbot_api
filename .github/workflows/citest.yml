@@ -46,6 +46,10 @@ jobs:
 
       - name: Build the Docker image
         run: |
+          # 빌드할 디렉토리 경로 확인
+          echo "Dockerfile location: ../../Dockerfile"
+          echo "Build context: ../../"
+
           docker buildx build --build-arg CHATBOT_APIURL=${{ secrets.CHATBOT_APIURL }} \
                               --build-arg CHATBOT_SECRETKEY=${{ secrets.CHATBOT_SECRETKEY }} \
                               --build-arg STT_APIURL=${{ secrets.STT_APIURL }} \
@@ -55,7 +59,8 @@ jobs:
                               --build-arg TTS_SECRETKEY=${{ secrets.TTS_SECRETKEY }} \
                               -f ../../Dockerfile \
                               -t hajaemin26/chatbot_api:latest \
-                              .
+                              ../../
+      
 
       - name: Push the Docker image to Docker Hub
         run: docker push hajaemin26/chatbot_api:latest
