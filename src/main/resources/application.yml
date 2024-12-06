@@ -1,6 +1,8 @@
 spring:
   application:
     name: chatbot_api
+  config:
+    import: optional:file:.env[.properties]
 
 logging:
   level:
@@ -14,3 +16,4 @@ logging:
 
 server:
   port: 8081
+
