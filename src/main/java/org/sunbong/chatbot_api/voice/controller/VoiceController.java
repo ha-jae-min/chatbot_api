@@ -44,10 +44,6 @@ public class VoiceController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"output.mp3\"")
                 .body(audioData);
     }
-    @GetMapping("health")
-    public ResponseEntity<String> healthCheck() {
-        return ResponseEntity.ok("VoiceController is healthy");
-    }
 
 
 
