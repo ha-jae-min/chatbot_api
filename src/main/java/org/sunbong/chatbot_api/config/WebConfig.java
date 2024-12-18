@@ -19,7 +19,8 @@ public class WebConfig implements WebMvcConfigurer {
                         "https://allmartservice.shop")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
-                .allowCredentials(true);
+                .allowCredentials(true)
+                .maxAge(3600); // 1시간 (3600초) 동안 캐시;
     }
 
     @Override
