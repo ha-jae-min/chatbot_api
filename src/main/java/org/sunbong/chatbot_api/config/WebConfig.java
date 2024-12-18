@@ -16,7 +16,8 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/api/v1/**")
                 .allowedOrigins("http://localhost:5173",
                         "https://0361-39-114-123-123.ngrok-free.app",
-                        "https://allmartservice.shop")
+                        "https://allmartservice.shop",
+                        "https://allmartsystem.shop")
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*")
                 .allowCredentials(true)
