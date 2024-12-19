@@ -17,7 +17,7 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 @RestController
-@RequestMapping("/api/v1/chatbot")
+@RequestMapping("/napi/v1/chatbot")
 @Log4j2
 @RequiredArgsConstructor
 public class ChatbotController {

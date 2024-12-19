@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/voice")
+@RequestMapping("/napi/v1/voice")
 @Log4j2
 @RequiredArgsConstructor
 public class VoiceController {
